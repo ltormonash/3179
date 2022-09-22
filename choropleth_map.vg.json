@@ -1,0 +1,40 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "USA - Gun Violence Deaths per 1000 People (2014-2022)",
+  "width": 800,
+  "height": 450,
+  "projection": {"type": "albersUsa"},
+  "data": {
+    "url": "https://raw.githubusercontent.com/ltormonash/3179/main/states-10m.json",
+    "format": {"type": "topojson", "feature": "states"}
+  },
+  "transform": [
+    {
+      "lookup": "properties.name",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/ltormonash/3179/main/deaths%20gun%20violence.csv"
+        },
+        "key": "State",
+        "fields": ["Killed", "Population"]
+      }
+    },
+    {"calculate": "datum.Killed/datum.Population * 1000", "as": "Deaths per 1000 People"}
+  ],
+  "mark": {"type": "geoshape"},
+  "encoding": {
+    "color": {
+      "field": "Deaths per 1000 People",
+      "type": "quantitative",
+      "scale": {
+          "type": "threshold",
+          "domain": [0,0.5,1,1.5],
+          "range": ["#fee5d9", "#fcae91", "#fb6a4a", "#de2d26", "#a50f15"]
+      }
+    },
+    "tooltip": [
+      {"field": "properties.name", "type": "nominal", "title": "State"},
+      {"field": "Deaths per 1000 People", "type": "quantitative"}
+    ]
+  }
+}
