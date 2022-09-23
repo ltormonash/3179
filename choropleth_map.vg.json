@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "USA - Gun Violence Deaths per 1000 People (2014-2022)",
+  "title": "USA - Gun Violence Deaths per 1000 People (2014-2021)",
   "width": 800,
   "height": 450,
   "projection": {"type": "albersUsa"},
