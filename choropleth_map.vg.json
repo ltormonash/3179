@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "USA - Gun Violence Deaths per 1000 People (2014-2021)",
+  "title": "USA - Gun Violence Deaths per 1000 People (2014-2022)",
   "width": 800,
   "height": 450,
   "projection": {"type": "albersUsa"},
@@ -21,16 +21,14 @@
     },
     {"calculate": "datum.Killed/datum.Population * 1000", "as": "Deaths per 1000 People"}
   ],
-  "mark": {"type": "geoshape"},
+  "mark": {"type": "geoshape", "stroke": "#757575", "strokeWidth": 1},
   "encoding": {
     "color": {
       "field": "Deaths per 1000 People",
       "type": "quantitative",
       "scale": {
-          "type": "threshold",
-          "domain": [0,0.5,1,1.5],
-          "range": ["#fee5d9", "#fcae91", "#fb6a4a", "#de2d26", "#a50f15"]
-      }
+        "domainMax": 1.2,
+      "range": ["white","#7f0000"]}
     },
     "tooltip": [
       {"field": "properties.name", "type": "nominal", "title": "State"},
